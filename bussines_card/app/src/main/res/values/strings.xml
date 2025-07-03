@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Bussinees card</string>
+    <string name="dev_icon">Dev icon</string>
+    <string name="dev_name">Cristian Daniel Ramirez Marin</string>
+    <string name="dev_title">Mobile developer</string>
+    <string name="dev_company">Pragma S.A.</string>
+</resources>
