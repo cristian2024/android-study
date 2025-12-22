@@ -2,6 +2,7 @@ package com.uranodev.affirmation_app.infrastructure.repositories
 
 import com.uranodev.affirmation_app.data.dao.AffirmationDao
 import com.uranodev.affirmation_app.data.entities.getAffirmations
+import com.uranodev.affirmation_app.data.entities.getMappedAffirmationEntity
 import com.uranodev.affirmation_app.domain.models.Affirmation
 import com.uranodev.affirmation_app.domain.repository.AffirmationRepository
 import kotlinx.coroutines.flow.Flow
@@ -14,5 +15,10 @@ class AffirmationDaoRepository @Inject constructor(val affirmationDao: Affirmati
         val affirmations = affirmationDao.getAll()
         return affirmations.map { affirmation -> affirmation.getAffirmations }
     }
+
+    override suspend fun createAffirmation(affirmation: Affirmation) =
+        affirmationDao.insertAffirmation(affirmation.getMappedAffirmationEntity)
+
+
 }
 

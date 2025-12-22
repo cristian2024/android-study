@@ -6,7 +6,7 @@ import com.uranodev.affirmation_app.domain.models.Affirmation
 
 @Entity(tableName = "Affirmations")
 data class AffirmationEntity(
-    @PrimaryKey val uid: Int,
+    @PrimaryKey(autoGenerate = true) val uid: Int = 0,
     val message: String,
 )
 
@@ -15,3 +15,6 @@ val AffirmationEntity.getMappedAffirmation: Affirmation
 
 val List<AffirmationEntity>.getAffirmations: List<Affirmation>
     get() = this.map { affirmation -> affirmation.getMappedAffirmation }
+
+val Affirmation.getMappedAffirmationEntity: AffirmationEntity
+    get() = AffirmationEntity(message = this.message)

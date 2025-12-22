@@ -5,4 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface AffirmationRepository {
     fun getAffirmations(): Flow<List<Affirmation>>
+
+    suspend fun createAffirmation(affirmation: Affirmation)
 }

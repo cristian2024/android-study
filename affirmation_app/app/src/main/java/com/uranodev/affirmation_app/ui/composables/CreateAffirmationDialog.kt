@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -18,18 +17,22 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.uranodev.affirmation_app.domain.models.Affirmation
 
 @Composable
-fun CreateAffirmationBody(modifier: Modifier = Modifier) {
+fun CreateAffirmationDialog(
+    modifier: Modifier = Modifier,
+    onCreateAffirmation: (affirmation: Affirmation) -> Unit,
+    onClose: () -> Unit,
+) {
     var input by rememberSaveable { mutableStateOf("") }
     Dialog(
         onDismissRequest = {},
     ) {
-        Card {
+        Card(modifier) {
             Column(
                 Modifier.padding(all = 8.dp),
                 verticalArrangement = Arrangement.spacedBy(
@@ -38,7 +41,7 @@ fun CreateAffirmationBody(modifier: Modifier = Modifier) {
                 )
             ) {
                 Text(
-                    "Propina custom",
+                    "Crea tu propia afirmación",
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.fillMaxWidth()
@@ -46,13 +49,12 @@ fun CreateAffirmationBody(modifier: Modifier = Modifier) {
                 OutlinedTextField(
                     value = input,
                     modifier = Modifier.fillMaxWidth(),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     onValueChange = { newText ->
                         input = newText.trimStart { it == '0' }
                     },
                     label = {
                         Text(
-                            "Define tu nueva propina",
+                            "Mensaje de la afirmación",
                             style = MaterialTheme.typography.labelLarge,
                         )
                     }
@@ -60,7 +62,8 @@ fun CreateAffirmationBody(modifier: Modifier = Modifier) {
                 Column {
                     Button(
                         onClick = {
-                            onUpdateTip(input.toDouble())
+                            val affirmation = Affirmation(message = input)
+                            onCreateAffirmation(affirmation)
                         },
                         modifier = Modifier.fillMaxWidth(),
                         enabled = input.toIntOrNull() != null,

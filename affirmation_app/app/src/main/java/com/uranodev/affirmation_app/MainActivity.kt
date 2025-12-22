@@ -6,15 +6,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.uranodev.affirmation_app.ui.screens.AffirmationsScreen
+import com.uranodev.affirmation_app.ui.navigation.NavigationStack
 import com.uranodev.affirmation_app.ui.theme.Affirmation_appTheme
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
@@ -33,7 +31,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    AffirmationsScreen(){}
+                    NavigationStack()
                 }
             }
         }
@@ -41,8 +39,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @HiltAndroidApp
-class AffirmationsApplication : Application() {
-}
+class AffirmationsApplication : Application()
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
