@@ -8,8 +8,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import com.uranodev.affirmation_app.R
 import com.uranodev.affirmation_app.domain.models.Affirmation
+import com.uranodev.affirmation_app.ui.others.mappedImages
+
 
 @Composable
 fun AffirmationCard(
@@ -17,6 +21,11 @@ fun AffirmationCard(
     affirmation: Affirmation,
     onClick: (() -> Unit)? = null
 ) {
+
+    val context = LocalContext.current
+    val imageName = affirmation.iconName ?: "image_placeholder"
+    val drawable = mappedImages[imageName] ?: R.drawable.image_placeholder
+
     Card() {
         Text(affirmation.message)
     }

@@ -9,7 +9,7 @@ import com.uranodev.affirmation_app.data.entities.AffirmationEntity
 
 @Database(
     entities = [AffirmationEntity::class],
-    version = 2,
+    version = 3,
     exportSchema = false,
 )
 abstract class AffirmationDatabase : RoomDatabase() {
